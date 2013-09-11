@@ -1,0 +1,71 @@
+@import url(http://fonts.googleapis.com/css?family=Lato|Titillium+Web:400,200,300);
+
+$lato: 'Lato', sans-serif;
+$tit: 'Titillium Web', sans-serif;
+
+$gray: rgb(51,51,51);
+$green: rgb(189,209,48);
+
+/* Tags */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+html, body { height: 100% }
+html { font-size: 16px }
+body { font: 62.5% sans-serif }
+hr { display: none }
+li { list-style: none }
+a { text-decoration: none }
+
+/* Layout */
+
+.wrap {
+	min-height: 100%;
+}
+.head {
+	margin: 0 auto;
+	padding: 5.3em 0 2.8em;
+	width: 96em;
+}
+.body {
+	clear: both;
+	margin: 0 auto;
+	padding-bottom: 5.4em;
+	width: 96em;
+}
+.foot {
+	background: #434343;
+	margin-top: -5.4em;
+	position: relative;
+}
+
+/* Header */
+
+.logo { float: left; }
+
+.nav {
+	float: right;
+	font: 200 22px $tit;
+	text-transform: uppercase;
+}
+.menu-item {
+	float: left;
+}
+.menu-item:before {
+	color: $green;
+	content: '.';
+}
+.menu-item:first-child:before {
+	content: '';
+}
+.menu-item a {
+	color: $gray;
+}
+.submenu {
+	display: none;
+}
+.lang-menu {
+	display: none;
+}
