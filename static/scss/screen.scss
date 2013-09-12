@@ -1,0 +1,476 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Titillium+Web:400,300,200,600);
+
+$f1: 'Titillium Web', sans-serif;
+$f2: 'Lato', sans-serif;
+
+$gray: rgb(51,51,51);
+$green: rgb(190,210,47);
+$darkGreen: rgb(185,206,43);
+$darkerGreen: rgb(157,184,20);
+
+@mixin clearfix {
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+	&:after { clear: both }
+	& { *zoom: 1 }
+}
+
+@mixin transition($prop) {
+	$time: .25s;
+	-webkit-transition: $prop $time ease-out; 
+	   -moz-transition: $prop $time ease-out; 
+		 -o-transition: $prop $time ease-out; 
+			transition: $prop $time ease-out; 
+}
+
+@mixin box-sizing {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+			box-sizing: border-box;
+}
+
+@mixin placeholder($color) {
+	&::-webkit-input-placeholder { /* WebKit browsers */
+		color: $color;
+	}
+	&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color: $color;
+	}
+	&::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color: $color;
+	}
+	&:-ms-input-placeholder { /* Internet Explorer 10+ */
+		color: $color;
+	}
+}
+
+@mixin linear-gradient($orientation, $colors, $positions) {
+	$orientA: '';
+	$orientB: '';
+	$orientC: '';
+	@if $orientation == lr {
+		$orientA: left;
+		$orientB: to right;
+		$orientC: left top, right top;
+	}
+	@if $orientation == tb {
+		$orientA: top;
+		$orientB: to bottom;
+		$orientC: left top, left bottom;
+	}
+
+	$prop: ();
+	$old: ();
+	$total: length($colors);
+	@for $i from 1 through $total {
+		$prop: append($prop, nth($colors, $i) nth($positions, $i), comma);
+		$old: append($old, color-stop(nth($positions, $i),nth($colors, $i)), comma);
+	}
+	
+	background: nth($colors, 1); /* Old browsers */
+	background-image: -moz-linear-gradient($orientA, $prop); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, $orientC, $old); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient($orientA, $prop); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient($orientA, $prop); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient($orientA, $prop); /* IE10+ */
+	background-image: linear-gradient($orientB, $prop); /* W3C */
+}
+
+/* Tags */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+html, body { height: 100% }
+html { font-size: 16px }
+body {
+	background: #434343;
+	font: 62.5% sans-serif;
+	min-width: 98em;
+}
+hr, legend { display: none }
+fieldset { border: 0 none }
+li { list-style: none }
+a { text-decoration: none }
+
+/* Layout */
+
+.wrap {
+	background: #fff;
+	min-height: 100%;
+	overflow: hidden;
+}
+.head {
+	margin: 0 auto;
+	padding: 5.4em 0 2.3em;
+	position: relative;
+	width: 96em;
+	z-index: 10;
+	@include clearfix;
+}
+.body {
+	clear: both;
+	margin: 0 auto;
+	padding-bottom: 5.4em;
+	width: 96em;
+	@include clearfix;
+}
+.foot {
+	background: #434343;
+	margin-top: -5.4em;
+	min-height: 5.4em;
+	position: relative;
+}
+
+/* Header */
+
+.logo {
+	float: left;
+	font-size: 1em;
+	padding-left: 2.8em;
+}
+.logo-img {
+	display: block;
+	height: 9.4em;
+	width: 16em;
+}
+
+.nav {
+	float: right;
+	padding: 6.6em 1em 0 0;
+	text-transform: uppercase;
+}
+.menu-item {
+	float: left;
+	font: 200 2.2em $f1;
+	margin-left: 1em;
+	position: relative;
+	&:before {
+		color: $green;
+		content: '.';
+		font-weight: 600;
+		position: relative;
+		left: -.5em;
+	}
+}
+.menu-item:first-child:before {
+	content: '';
+	display: none;
+}
+.menu-item a {
+	color: $gray;
+	@include transition(color);
+	&:hover,
+	&:focus { color: $green }
+	&:active {
+		position: relative;
+		top: 1px;
+	}
+}
+.submenu {
+	background: #fff;
+	background: rgba(255,255,255, .9);
+	display: none;
+	font-size: .45em;
+	left: -1em;
+	padding: 1.6em 0 .6em;
+	position: absolute;
+	top: 3em;
+}
+.menu-item:hover .submenu { display: block }
+.submenu .menu-item {
+	font: 400 1.3em $f1;
+	margin: 0;
+	&:before {
+		content: '';
+		display: none;
+	}
+}
+.submenu a {
+	display: block;
+	padding: 0 1.2em .3em;
+	white-space: nowrap;
+}
+.lang-menu {
+	display: none;
+}
+
+/* Footer */
+
+.menu-foot {
+	background: url(../img/mini-logo.svg) no-repeat 5em center;
+	background-size: 5em 2em;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-left: 13.6em;
+	position: relative;
+	top: .4em;
+	width: 96em;
+	.menu-item {
+		float: left;
+		font: 200 1.1em $f1;
+		margin: 0 2em 0 0;
+		&:before { content: '' }
+		a {
+			color: #fff;
+			display: block;
+			line-height: 4em;
+			text-transform: uppercase;
+			&:hover,
+			&:focus,
+			&:active { color: $green }
+		}
+	}
+}
+.copyright {
+	color: #fff;
+	font: 200 1.1em $f1;
+	left: 42%;
+	line-height: 4em;
+	position: absolute;
+	top: .4em;
+}
+.social-menu {
+	margin-right: -46.6em;
+	position: absolute;
+	right: 50%;
+	top: 1.9em;
+	&:hover .social-item {
+		opacity: .5;
+		&:hover { opacity: 1 }
+	}
+}
+.social-item {
+	float: right;
+	margin-left: .6em;
+	img { display: block }
+	@include transition(opacity);
+}
+
+/* Home */
+
+.mosaic {
+	margin-bottom: 10em;
+	overflow: hidden;
+	text-align: center;
+}
+.mosaic-row { clear: both }
+.mosaic-wide {
+	background: #f0f0f0;
+	float: left;
+	width: 66.67%;
+}
+.mosaic-text {
+	background: $green;
+	float: left;
+	width: 33.33%;
+}
+.mosaic-image {
+	background: #f0f0f0;
+	float: left;
+	width: 33.33%;
+}
+.mosaic a {
+	border: .2em solid #fff;
+	display: block;
+	min-height: 28em;
+	width: 100%;
+	@include box-sizing;
+}
+.mosaic img {
+	display: block;
+	max-height: 20em;
+	max-width: 80%;
+}
+.no-left a { border-left: 0 none }
+.no-right a { border-right: 0 none }
+.mosaic-title {
+	color: $gray;
+	font: 300 3.9em $f1;
+	padding: 1.3em 0 .2em;
+	text-transform: uppercase;
+}
+.mosaic-excerpt {
+	border-top: 1px solid $gray;
+	color: $gray;
+	display: block;
+	font: 200 1.5em/1.35em $f1;
+	margin: 0 auto;
+	padding: 1.3em 0 0;
+	width: 13.5em;
+}
+
+/* Pages */
+
+#about,
+#contact {
+	color: $gray;
+	height: 73em;
+	overflow: hidden;
+	position: relative;
+}
+$padTop: 11em;
+#about {
+	@include linear-gradient(lr, ($green, $green, $darkGreen, $darkGreen), (0%, 58.5%, 58.5%, 100%));
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 104em 100%;
+
+	.column-1 {
+		left: 50%;
+		margin-left: -44em;
+		padding-top: $padTop;
+		position: absolute;
+		top: 0;
+		width: 50em;
+	}
+
+	.column-2 {
+		left: 50%;
+		margin-left: 12em;
+		padding-top: $padTop;
+		position: absolute;
+		top: 0;
+		width: 32em;
+	}
+}
+#contact {
+	@include linear-gradient(lr, ($green, $darkGreen, $darkGreen, $green, $green), (0%, 0%, 50%, 50%, 100%));
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 96em 100%;
+
+	.column-1 {
+		left: 50%;
+		margin-left: -44em;
+		padding-top: $padTop;
+		position: absolute;
+		top: 0;
+	}
+	.column-2 {
+		left: 50%;
+		margin-left: 6em;
+		padding-top: $padTop;
+		position: absolute;
+		top: 0;
+		width: 32.6em;
+	}
+}
+
+.torso p {
+	font: 300 1.8em/1.44 $f2;
+	margin-top: 1.44em;
+	strong { font-weight: 700 }
+}
+
+.marilia img {
+	display: block;
+	height: auto;
+	margin-bottom: 2.6em;
+	width: 100%;
+}
+
+.big-title { font: 200 3.5em/1.2 $f1 }
+.default-title { font: 200 2.8em $f1 }
+.big-button {
+	border: 2px solid $gray;
+	color: $gray;
+	display: inline-block;
+	font: 300 1.77em $f1;
+	padding: .1em .6em;
+	text-transform: uppercase;
+	@include transition(all);
+	&:hover,
+	&:focus,
+	&:active {
+		background: $gray;
+		color: $green;
+	}
+}
+.small-button {
+	background: $darkerGreen;
+	color: $gray;
+	display: inline-block;
+	font: 400 .7em $f1;
+	padding: .15em .65em;
+	text-transform: uppercase;
+	@include transition(all);
+	&:hover,
+	&:focus,
+	&:active {
+		background: $gray;
+		color: $green;
+	}
+}
+.contact-me {
+	margin-top: 4.5em;
+	a {
+		background: $darkGreen;
+		color: $gray;
+		display: block;
+		font: 400 1.4em $f1;
+		margin: 0 3em .9em 2.4em;
+		padding: .2em .8em;
+		position: relative;
+		@include transition(all);
+		&:hover,
+		&:focus,
+		&:active {
+			background: $gray;
+			color: $green;
+		}
+		&:before {
+			background-color: $darkGreen;
+			background-image: url(../img/icons.svg);
+			background-repeat: no-repeat;
+			background-size: 2.14em 6.43em;
+			content: ' ';
+			display: block;
+			height: 100%;
+			left: -2.3em;
+			position: absolute;
+			top: 0;
+			width: 2em;
+		}
+	}
+	.my-phone a:before { background-position: 0 -2.14em }
+	.my-skype a:before { background-position: 0 -4.29em }
+}
+
+.text,
+.area {
+	background: none;
+	border: 1px solid $gray;
+	color: $gray;
+	display: block;
+	font: 300 2.8em $f1;
+	margin: 0 0 .7em;
+	padding: 0 .5em;
+	width: 14.2em;
+	@include box-sizing;
+	@include placeholder($gray);
+	&:focus { @include placeholder(transparent) }
+}
+.button {
+	background: none;
+	border: 1px solid $gray;
+	color: $gray;
+	cursor: pointer;
+	display: inline-block;
+	font: 300 2.4em $f1;
+	padding: 0 .5em;
+	text-transform: uppercase;
+	width: auto;
+	@include transition(all); 
+	&:hover,
+	&:focus,
+	&:active {
+		background: $gray;
+		color: $green;
+	}
+}
+.submit { text-align: right }
