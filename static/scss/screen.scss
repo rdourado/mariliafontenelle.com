@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Titillium+Web:400,300,200,600);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900|Titillium+Web:400,300,200,600);
 
 $f1: 'Titillium Web', sans-serif;
 $f2: 'Lato', sans-serif;
@@ -101,6 +101,7 @@ hr, legend { display: none }
 fieldset { border: 0 none }
 li { list-style: none }
 a {
+	outline: none;
 	text-decoration: none;
 	&:focus,
 	&:active {
@@ -389,128 +390,6 @@ $m_height: 28em;
 	vertical-align: middle;
 }
 
-// .mosaic-wide {
-// 	float: left;
-// 	position: relative;
-// 	width: 99.99%;
-// 	.mosaic-nav,
-// 	.mosaic-cover {
-// 		border-left: 0 none;
-// 		width: 33.34%;
-// 	}
-// 	.mosaic-cover {
-// 		right: 0;
-// 		.table {
-// 			background: $green;
-// 			border-left: 0 none;
-// 			width: 100%;
-// 		}
-// 	}
-// 	.mosaic-menu { padding-left: 30% }
-// 	.mosaic-image {
-// 		border-right: 0 none;
-// 		float: left;
-// 		width: 66.66%;
-// 	}
-// 	&:hover .mosaic-cover {
-// 		right: 23%;
-// 		.table { border-right: 0 none }
-// 	}
-// }
-// .mosaic-narrow {
-// 	float: left;
-// 	position: relative;
-// 	width: 66.67%;
-// 	.mosaic-nav,
-// 	.mosaic-cover {
-// 		border-right: 0 none;
-// 		float: left;
-// 		width: 50%;
-// 	}
-// 	.mosaic-cover {
-// 		left: 0;
-// 		.table {
-// 			background: $green;
-// 			border-right: 0 none;
-// 			width: 100%;
-// 		}
-// 	}
-// 	.mosaic-menu { padding-right: 30% }
-// 	.mosaic-image {
-// 		border-left: 0 none;
-// 		float: right;
-// 		width: 50%;
-// 	}
-// }
-// .mosaic-box {
-// 	float: left;
-// 	height: 28em;
-// 	width: 33.33%;
-// 	.mosaic-image { width: 100% }
-// }
-
-// .table {
-// 	background: $gray;
-// 	border: 2px solid #fff;
-// 	display: table;
-// 	height: 28em;
-// 	@include box-sizing;
-// }
-// .cell {
-// 	display: table-cell;
-// 	vertical-align: middle;
-// }
-
-
-// .mosaic-wide {
-// 	float: left;
-// 	width: 99.99%;
-// }
-// .mosaic-narrow {
-// 	float: left;
-// 	width: 66.66%;
-// }
-// .mosaic-image {
-// 	float: left;
-// 	width: 33.33%;
-// }
-
-// .mosaic-menu {
-// 	display: table-cell;
-// 	height: 27.6em;
-// }
-
-// .mosaic-row { clear: both }
-// .mosaic-wide {
-// 	background: #f0f0f0;
-// 	float: left;
-// 	width: 66.67%;
-// }
-// .mosaic-text {
-// 	background: $green;
-// 	float: left;
-// 	width: 33.33%;
-// }
-// .mosaic-image {
-// 	background: #f0f0f0;
-// 	float: left;
-// 	width: 33.33%;
-// }
-// .mosaic a {
-// 	border: .2em solid #fff;
-// 	display: block;
-// 	min-height: 28em;
-// 	width: 100%;
-// 	@include box-sizing;
-// }
-// .mosaic img {
-// 	display: block;
-// 	max-height: 20em;
-// 	max-width: 80%;
-// }
-// .no-left a { border-left: 0 none }
-// .no-right a { border-right: 0 none }
-
 .mosaic-title {
 	color: $gray;
 	font: 300 3.9em $f1;
@@ -530,13 +409,17 @@ $m_height: 28em;
 /* Archive */
 
 .matrix {
+	margin: 0 auto;
 	padding-bottom: 4em;
+	width: 96em;
 	@include clearfix;
 }
 .matrix-item {
+	background-position: center;
+	background-size: cover;
 	border: 2px solid #fff;
 	float: left;
-	width: 33.33%;
+	width: 32em;
 	@include box-sizing;
 	&:hover .matrix-cover { opacity: 1 }
 }
@@ -567,7 +450,7 @@ $m_height: 28em;
 	font: 400 4.2em $f1;
 }
 
-/* Single */
+/* Pages */
 
 .header {
 	background: $lighterGray;
@@ -576,7 +459,7 @@ $m_height: 28em;
 .header .wrap {
 	border-top: 2px solid $green;
 	margin: 0 auto;
-	padding: 4.5em 7em;
+	padding: 4.5em 7em 4.2em;
 	width: 82em;
 }
 .heading {
@@ -592,7 +475,7 @@ $m_height: 28em;
 }
 .page-category {
 	color: $green;
-	font: 400 1.8em $f1;
+	font: 400 1.8em/1.4 $f1;
 	text-transform: uppercase;
 }
 .page-title {
@@ -605,6 +488,28 @@ $m_height: 28em;
 	margin: -2px auto 0;
 	padding: 4.5em 3em;
 	width: 78em;
+	.post & { border-color: #fff }
+}
+.page-thumbnail a {
+	display: block;
+	position: relative;
+	&:before {
+		background: url(../img/magnifier.svg) no-repeat;
+		background-size: 5.2em;
+		content: '';
+		display: block;
+		height: 5.2em;
+		left: 50%;
+		margin: -6.9em 0 0 -2.6em;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		width: 5.2em;
+		@include transition(opacity,$fast);
+	}
+	&:hover:before,
+	&:focus:before,
+	&:active:before { opacity: 1 }
 }
 .page-thumbnail img { display: block }
 .page-content,
@@ -618,23 +523,185 @@ $m_height: 28em;
 .page-content {
 	color: $lightGray;
 	float: left;
-	padding: 4em 2%;
-	width: 56%;
+	padding: 2em 2%;
+	width: 57%;
 	p {
 		font: 300 1.6em/1.4 $f2;
 		margin-bottom: 1.4em;
 	}
 	h3, h4, h5, h6 {
-		font: 300 1.6em/1.4 $f2;
+		font: 400 1.8em/1.245 $f1;
+		margin: 2.49em 0 1.245em;
 		text-transform: uppercase;
+		&:first-child { margin-top: 0 }
 	}
 }
 .page-sidebar {
 	float: right;
-	width: 40%;
+	padding: 2em 0;
+	width: 39%;
+}
+.figure img {
+	display: block;
+	height: auto;
+	margin-bottom: .5em;
+	width: 100%;
+}
+.figure .caption {
+	font: 300 1.4em $f2;
+	text-align: right;
+	padding: 0 1%;
 }
 
-/* Pages */
+/* Posts */
+
+.post-category {
+	color: $lightGray;
+	font: 400 1.2em/1.2 $f1;
+	letter-spacing: .3em;
+	padding-left: .3em;
+	text-transform: uppercase;
+	width: 80%;
+}
+.post-title {
+	color: $lightGray;
+	font: 200 3.5em/1.4 $f1;
+	text-transform: uppercase;
+	width: 80%;
+}
+.post-tags {
+	width: 80%;
+	&:before {
+		color: $green;
+		content: '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
+		display: block;
+		font: normal 1.5em sans-serif;
+		left: -.3em;
+		overflow: hidden;
+		position: relative;
+		top: -.6em;
+		white-space: nowrap;
+	}
+}
+.dt {
+	clear: left;
+	color: $lightGray;
+	float: left;
+	font: 900 .8em $f2;
+	margin-right: .5em;
+	padding-top: .5em;
+	text-transform: uppercase;
+}
+.dd {
+	color: $lightGray;
+	float: left;
+	font: 300 1.2em $f2;
+	text-transform: uppercase;
+}
+.post-summary {
+	color: $gray;
+	font: 300 1.6em/1.4 $f2;
+}
+
+.post-gallery { position: relative }
+.gallery-wrap {
+	margin: 0 auto;
+	overflow: hidden;
+	width: 70.6em;
+	img {
+		float: left;
+		height: auto;
+		width: 70.6em;
+	}
+}
+.prev,
+.next {
+	border: 0 none;
+	cursor: pointer;
+	display: block;
+	height: 100%;
+	opacity: .4;
+	position: absolute;
+	top: 0;
+	width: 5em;
+	@include transition(opacity,$fast);
+	&:hover,
+	&:focus,
+	&:active { opacity: 1 }
+}
+.prev {
+	background: url(../img/left-gray.svg) no-repeat center;
+	background-size: 2.1em 3.8em;
+	left: -3em;
+}
+.next {
+	background: url(../img/right-gray.svg) no-repeat center;
+	background-size: 2.1em 3.8em;
+	right: -3em;
+}
+
+.post-nav {
+	clear: both;
+	font: 300 1.5em/2.25 $f2;
+	margin: 0 auto;
+	padding: 4em 0;
+	text-transform: uppercase;
+	width: 47.07em;
+	@include clearfix;
+}
+.nav-item { display: inline }
+.nav-home {
+	background: url(../img/grid.svg) no-repeat left center;
+	background-size: 2.4em 2.667em;
+	color: $gray;
+	float: left;
+	padding-left: 3em;
+	@include transition(color,$fast);
+	&:hover,
+	&:focus,
+	&:active { color: $green }
+}
+.nav-prev,
+.nav-next {
+	color: $gray;
+	float: right;
+	padding: 0 2em;
+	@include transition(color,$fast);
+	&:hover,
+	&:focus,
+	&:active { color: $green }
+}
+.nav-prev {
+	background: url(../img/left-green.svg) no-repeat left center;
+	background-size: 1.13em 1.87em;
+}
+.nav-next {
+	background: url(../img/right-green.svg) no-repeat right center;
+	background-size: 1.13em 1.87em;
+}
+
+.more-posts { clear: both }
+.title {
+	border-bottom: 1px solid $green;
+	color: $gray;
+	font: 300 1.5em $f2;
+	margin-bottom: 1em;
+	padding: 0 2px 1em;
+	text-transform: uppercase;
+}
+.more-wrap {
+	font-size: .811em;
+	position: relative;
+	@include clearfix;
+	.prev { margin-left: -1.3em }
+	.next { margin-right: -1.3em }
+}
+.more-view {
+	height: $m_height;
+	overflow: hidden;
+}
+
+/* About / Contact */
 
 #about,
 #contact {
