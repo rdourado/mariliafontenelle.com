@@ -1,54 +1,11 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="robots" content="noindex">
-	<title>Marília Fontenelle | Arquitetura Sustentável</title>
-	<link href="css/screen.css" media="screen" rel="stylesheet">
-</head>
-<body>
-	<div class="wrap">
-		<header class="head">
-			<div class="logo"><a href="#"><img src="img/logo.svg" alt="Marília Fontenelle" class="logo-img" width="160" height="94"></a></div>
-			<nav class="nav">
-				<ul class="menu">
-					<li class="menu-item"><a href="index.html#about">Empresa</a></li>
-					<li class="menu-item">
-						<a href="archive.html">Projeto</a>
-						<ul class="submenu">
-							<li class="menu-item"><a href="archive.html">Arquitetura</a></li>
-							<li class="menu-item"><a href="archive.html">Interiores</a></li>
-							<li class="menu-item"><a href="archive.html">Portfolio</a></li>
-						</ul>
-					</li>
-					<li class="menu-item">
-						<a href="archive.html">Consultoria</a>
-						<ul class="submenu">
-							<li class="menu-item"><a href="page.html">Conforto Lumínico</a></li>
-							<li class="menu-item"><a href="page.html">Conforto Térmico</a></li>
-							<li class="menu-item"><a href="page.html">Certificações</a></li>
-							<li class="menu-item"><a href="page.html">Apoio técnico compra de imóvel</a></li>
-							<li class="menu-item"><a href="archive.html">Portfolio</a></li>
-						</ul>
-					</li>
-					<li class="menu-item"><a href="page.html">Ensino</a></li>
-					<li class="menu-item"><a href="page.html">Publicações</a></li>
-					<li class="menu-item item-contact"><a href="index.html#contact">Contato</a></li>
-				</ul>
-				<ul class="lang-menu">
-					<li class="lang-item"><a href="#">Português</a></li>
-					<li class="lang-item"><a href="#">Inglês</a></li>
-				</ul>
-			</nav>
-		</header>
-		<hr>
+<?php 	get_header() ?>
 		<div class="torso" role="main">
 			<article class="post hentry">
 				<header class="header">
 					<div class="wrap">
 						<hgroup class="heading">
 							<h2 class="post-category">Apartamento</h2>
-							<h1 class="post-title entry-title">Flamengo</h1>
+							<h1 class="post-title entry-title"><?php the_title() ?></h1>
 							<dl class="post-tags">
 								<dt class="dt">Local</dt>
 								<dd class="dd">Rio de Janeiro-RJ</dd>
@@ -58,7 +15,7 @@
 								<dd class="dd">Marília Fontenelle</dd>
 							</dl>
 						</hgroup>
-						<p class="post-summary entry-summary">Este texto foi gerado pelo Akatu e é um incentivo ao consumo consciente.<br><br>Consuma apenas o necessário. Reflita sobre suas reais necessidades e procure viver com menos. Os impactos de seu consumo.Leve em consideração o meio ambiente e a sociedade em suas escolhas de consumo.</p>
+						<p class="post-summary entry-summary"><?php the_excerpt() ?></p>
 					</div>
 				</header>
 				<div class="content entry-content">
@@ -74,12 +31,12 @@
 								<button class="next"></button>
 							</div>
 							<ul class="post-nav">
-								<li class="nav-item"><a href="archive.html" class="nav-home">Voltar aos projetos</a></li>
-								<li class="nav-item"><a href="#" class="nav-next">Próximo</a></li>
-								<li class="nav-item"><a href="#" class="nav-prev">Anterior</a></li>
+								<li class="nav-item"><a href="archive.html" class="nav-home"><?php _e('Outros Projetos', 'marilia') ?></a></li>
+								<li class="nav-item"><a href="#" class="nav-next"><?php _e('Próximo', 'marilia') ?></a></li>
+								<li class="nav-item"><a href="#" class="nav-prev"><?php _e('Anterior', 'marilia') ?></a></li>
 							</ul>
-							<div class="more-posts">
-								<h3 class="title">Outros Projetos</h3>
+							<section class="more-posts">
+								<h3 class="title"><?php _e('Outros Projetos', 'marilia') ?></h3>
 								<div class="more-wrap">
 									<div class="more-view">
 										<ul class="matrix">
@@ -136,24 +93,10 @@
 									<button class="prev"></button>
 									<button class="next"></button>
 								</div>
-							</div>
+							</section>
 						</div>
 					</div>
 				</div>
 			</article>
 		</div>
-	</div>
-	<hr>
-	<footer class="foot">
-		<ul class="menu-foot">
-			<li class="menu-item"><a href="contact.html">Contato</a></li>
-			<li class="menu-item"><a href="#">Área do cliente</a></li>
-		</ul>
-		<ul class="social-menu">
-			<li class="social-item item-fb"><a href="#"><img src="img/ico-fb.svg" alt="Facebook" width="16" height="16"></a></li>
-			<li class="social-item item-in"><a href="#"><img src="img/ico-in.svg" alt="LinkedIn" width="16" height="16"></a></li>
-		</ul>
-		<p class="copyright">© 2013 - Marília Fontenelle — Todos os direitos reservados.</p>
-	</footer>
-</body>
-</html>
+<?php 	get_footer() ?>
