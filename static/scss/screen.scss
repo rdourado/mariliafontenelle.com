@@ -755,7 +755,8 @@ $m_height: 28em;
 		margin-top: 1.44em;
 		strong { font-weight: 700 }
 	}
-	&:target { height: 63em }
+	&:target,
+	.torso & { height: 63em }
 }
 $padTop: 6em;
 #about {

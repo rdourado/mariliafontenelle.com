@@ -918,8 +918,9 @@ a:focus, a:active {
 #contact p strong {
   font-weight: 700;
 }
-#about:target,
-#contact:target {
+#about:target, .torso #about,
+#contact:target, .torso
+#contact {
   height: 63em;
 }
 
