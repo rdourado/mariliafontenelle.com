@@ -1,22 +1,34 @@
+<?php 
+/*
+Template name: Sobre
+*/
+?>
 <?php 	get_header() ?>
 		<div class="torso" role="main">
+<?php 		while( have_posts() ) : the_post(); ?>
 			<article id="about" class="hentry">
 				<div class="column-1">
-					<h1 class="big-title entry-title">Somos um escritório, mas esse texto foi gerado pelo Akatu e é um incentivo ao consumo consciente.</h1>
 					<div class="entry-content">
-						<p>Consuma apenas o necessário. Reflita sobre suas reais <strong>necessidades</strong> e procure viver com menos. <strong>Os impactos de seu consumo</strong>. Leve em consideração o meio ambiente e a sociedade em suas escolhas de consumo.</p>
-						<p>Reflita sobre suas reais necessidades e procure viver com menos. Os impactos de seu consumo. Leve em consideração o meio ambiente e a sociedade em suas escolhas de consumo.</p>
-						<p><a href="contact.html" class="big-button">Fale conosco</a></p>
+						<?php the_field('content') ?>
+<?php 					if ( get_field( 'contact_link' ) ) : ?>
+						<p><a href="<?php the_field('contact_link') ?>" class="big-button"><?php _e('Fale conosco', 'marilia') ?></a></p>
+<?php 					endif; ?>
 					</div>
 				</div>
 				<div class="column-2">
 					<figure class="marilia">
-						<img src="http://dummyimage.com/320x174" alt="" class="marilia-avatar" width="320" height="174">
-						<figcaption class="default-title">Marília Fontenelle</figcaption>
+<?php 					if ( get_field( 'image' ) ) : ?>
+						<img src="<?php the_field('image') ?>" alt="" class="marilia-avatar">
+<?php 					endif; ?>
+						<figcaption><?php the_field('caption') ?></figcaption>
 					</figure>
-					<p>Consuma apenas o necessário.<br>Reflita sobre suas reais necessidades e procure viver com menos. Os impactos de seu consumo. Leve em consideração o meio ambiente e a sociedade em suas escolhas de consumo.</p>
-					<p><a href="#" class="small-button">Currículo Lates</a></p>
+					<?php the_field('resume') ?>
+<?php 				if ( get_field('resume_type') ) :
+					$link = ('file' == get_field('resume_type')) ? get_field('resume_file') : esc_url( get_field('resume_link') ); ?>
+					<p><a href="<?php echo $link; ?>" class="small-button"><?php _e('Currículo Lates', 'marilia') ?></a></p>
+<?php 				endif; ?>
 				</div>
 			</article>
+<?php 		endwhile; ?>
 		</div>
 <?php 	get_footer() ?>

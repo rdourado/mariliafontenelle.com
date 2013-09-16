@@ -1,5 +1,6 @@
 <?php 	get_header() ?>
 		<div class="torso" role="main">
+<?php 		while( have_posts() ) : the_post(); ?>
 			<article class="post hentry">
 				<header class="header">
 					<div class="wrap">
@@ -7,12 +8,18 @@
 							<h2 class="post-category">Apartamento</h2>
 							<h1 class="post-title entry-title"><?php the_title() ?></h1>
 							<dl class="post-tags">
-								<dt class="dt">Local</dt>
-								<dd class="dd">Rio de Janeiro-RJ</dd>
-								<dt class="dt">ano</dt>
-								<dd class="dd">2009</dd>
-								<dt class="dt">Projeto</dt>
-								<dd class="dd">Marília Fontenelle</dd>
+<?php 							if ( get_field( 'local' ) ) : ?>
+								<dt class="dt"><?php _e('Local', 'marilia') ?></dt>
+								<dd class="dd"><?php the_field( 'local' ) ?></dd>
+<?php 							endif; ?>
+<?php 							if ( get_field( 'ano' ) ) : ?>
+								<dt class="dt"><?php _e('Ano', 'marilia') ?></dt>
+								<dd class="dd"><?php the_field( 'ano' ) ?></dd>
+<?php 							endif; ?>
+<?php 							if ( get_field( 'autoria' ) ) : ?>
+								<dt class="dt"><?php _e('Projeto', 'marilia') ?></dt>
+								<dd class="dd"><?php the_field( 'autoria' ) ?></dd>
+<?php 							endif; ?>
 							</dl>
 						</hgroup>
 						<p class="post-summary entry-summary"><?php the_excerpt() ?></p>
@@ -98,5 +105,6 @@
 					</div>
 				</div>
 			</article>
+<?php 		endwhile; ?>
 		</div>
 <?php 	get_footer() ?>
