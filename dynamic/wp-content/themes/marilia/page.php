@@ -5,7 +5,11 @@
 				<header class="header">
 					<div class="wrap">
 						<hgroup class="heading">
-							<h2 class="page-category">Consultoria</h2>
+<?php 						if ( get_field( 'pretitle' ) ) : ?>
+							<h2 class="page-category"><?php the_field('pretitle') ?></h2>
+<?php 						elseif ( $post->post_parent ) : ?>
+							<h2 class="page-category"><?php echo get_the_title( $post->post_parent ); ?></h2>
+<?php 						endif; ?>
 							<h1 class="page-title entry-title"><?php the_title(); ?></h1>
 						</hgroup>
 						<p class="page-summary entry-summary"><?php the_excerpt() ?></p>
@@ -13,19 +17,27 @@
 				</header>
 				<div class="content entry-content">
 					<div class="wrap">
+<?php 					if ( get_field( 'featured_image' ) ) : ?>
 						<div class="page-thumbnail">
-							<a href="#"><img src="http://dummyimage.com/780x372/000/fff" alt="" width="780" height="372"></a>
+							<?php wp_get_attachment_image( get_field( 'featured_image' ), 'featured_image' ); ?>
+
 						</div>
+<?php 					endif; ?>
 						<div class="page-wrap">
 							<div class="page-content">
 								<?php the_content(); ?>
 							</div>
+<?php 						if ( get_field( 'sidebar' ) ) : ?>
 							<div class="page-sidebar">
+<?php 							if ( 'image' == get_field( 'sidebar' ) ) : ?>
 								<figure class="figure">
-									<img src="http://dummyimage.com/300x300" alt="" width="300" height="300">
-									<figcaption class="caption">Legenda da imagem acima</figcaption>
+									<?php wp_get_attachment_image( get_field( 'sidebar_image' ), 'medium' ); ?>
+
+									<figcaption class="caption"><?php the_field('sidebar_caption') ?></figcaption>
 								</figure>
+<?php 							endif; ?>
 							</div>
+<?php 						endif; ?>
 						</div>
 					</div>
 				</div>

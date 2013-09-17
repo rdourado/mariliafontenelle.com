@@ -556,18 +556,38 @@ $m_height: 28em;
 	background: rgba(255,255,255, .95);
 	overflow: hidden;
 	position: relative;
-	top: -8.6em;
+	
 }
+.page-thumbnail + .page-wrap { top: -8.6em }
 .page-content {
 	color: $lightGray;
 	float: left;
 	min-height: 20em;
 	padding: 2em 2%;
 	width: 57%;
-	p {
+	p, ul, ol {
 		font: 300 1.6em/1.4 $f2;
 		margin-bottom: 1.4em;
+		strong { font-weight: 400 }
 	}
+	li {
+		margin-left: 1.5em;
+		position: relative;
+		&:before {
+			color: $green;
+			content: '• ';
+			left: -1.5em;
+			position: absolute;
+			top: 0;
+		}
+	}
+	/*li {
+		list-style-position: inside;
+		margin-left: 1em;
+	}
+	ul li { list-style: square }
+	ol li { list-style: decimal }*/
+
 	h3, h4, h5, h6 {
 		font: 400 1.8em/1.245 $f1;
 		margin: 2.49em 0 1.245em;

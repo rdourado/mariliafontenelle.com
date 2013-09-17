@@ -1,3 +1,8 @@
+<?php 
+/*
+Template name: Home
+*/
+?>
 <?php 	get_header() ?>
 		<div class="body" role="main">
 			<div class="mosaic">

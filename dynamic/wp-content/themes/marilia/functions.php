@@ -1,5 +1,6 @@
 <?php 
 
+add_filter( 'the_excerpt', 'nl2br' );
 remove_filter( 'the_excerpt', 'wpautop' );
 
 function t_url() {
@@ -38,11 +39,13 @@ function my_setup() {
 	// Menu
 	register_nav_menu( 'primary', __('Menu Superior', 'marilia') );
 	// Thumbnails
-	add_theme_support( 'post-thumbnails' );
+	// add_theme_support( 'post-thumbnails' );
+	add_image_size( 'featured_image', 	780, 372, true );
+	add_image_size( 'wide_image', 		638, 276, true );
+	add_image_size( 'square_image', 	318, 276, true );
 	// Remove default gallery style
 	add_filter( 'use_default_gallery_style', '__return_false' );
 }
-
 
 function my_init_setup() {
 	// remove_role( 'subscriber' );
@@ -60,6 +63,18 @@ function my_init_setup() {
 }
 
 // 
+// Admin
+// 
+
+add_filter( 'default_hidden_meta_boxes', 'be_hidden_meta_boxes', 10, 2 );
+function be_hidden_meta_boxes( $hidden, $screen ) {
+	if ( 'post' == $screen->base || 'page' == $screen->base )
+		$hidden = array('slugdiv', 'trackbacksdiv', 'commentstatusdiv', 'commentsdiv', 'authordiv', 'revisionsdiv', 'postcustom');
+		// remove 'postexcerpt'
+	return $hidden;
+}
+
+// 
 // Fix filenames
 // 
 
@@ -70,6 +85,25 @@ function make_filename_hash( $filename ) {
 	$ext  = empty( $info['extension'] ) ? '' : '.' . $info['extension'];
 	$name = basename( $filename, $ext );
 	return md5( $name ) . $ext;
+}
+
+// 
+// Excerpt
+// 
+
+add_filter( 'excerpt_length', 'new_excerpt_length' );
+add_filter( 'acf/update_value/name=excerpt', 'my_acf_excerpt', 10, 3 );
+
+function new_excerpt_length( $length ) {
+	return 20;
+}
+
+function my_acf_excerpt( $value, $post_id, $field ) {
+	wp_update_post( array(
+		'ID' => $post_id,
+		'post_excerpt' => $value
+	) );
+	return $value;
 }
 
 // 
