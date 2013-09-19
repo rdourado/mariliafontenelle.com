@@ -19,13 +19,23 @@ function my_logo() {
 	else echo "<div class='logo'><a href='{$home}'>{$logo}</a></div>\n";
 }
 
-function the_thumb( $size = 'thumbnail' ) {
+function my_thumb( $size = 'thumbnail' ) {
 	global $post;
-	$id = get_post_thumbnail_id();
+	$id = get_post_thumbnail_id( $post->ID );
 	if ( $id )
 		$src = wp_get_attachment_image_src( $id, $size );
 	if ( $src )
-		echo $src['url'];
+		echo $src[0];
+}
+
+function my_category() {
+	global $post;
+	if ( $post->post_type == 'page' ) {
+		echo get_the_title( $post->post_parent );
+	} elseif ( $post->post_type == 'projeto' ) {
+		$list = get_the_category_list( ', ', '', $post->ID );
+		echo strip_tags( $list );
+	}
 }
 
 // 
@@ -39,10 +49,10 @@ function my_setup() {
 	// Menu
 	register_nav_menu( 'primary', __('Menu Superior', 'marilia') );
 	// Thumbnails
-	// add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails', array('page', 'projeto', 'publicacao') );
 	add_image_size( 'featured_image', 	780, 372, true );
 	add_image_size( 'wide_image', 		638, 276, true );
-	add_image_size( 'square_image', 	318, 276, true );
+	// add_image_size( 'square_image', 	318, 276, true );
 	// Remove default gallery style
 	add_filter( 'use_default_gallery_style', '__return_false' );
 }
@@ -93,6 +103,8 @@ function make_filename_hash( $filename ) {
 
 add_filter( 'excerpt_length', 'new_excerpt_length' );
 add_filter( 'acf/update_value/name=excerpt', 'my_acf_excerpt', 10, 3 );
+add_filter( 'acf/update_value/name=gallery', 'my_acf_gallery', 10, 3 );
+add_filter( 'acf/update_value/name=featured_image', 'my_acf_featured_image', 10, 3 );
 
 function new_excerpt_length( $length ) {
 	return 20;
@@ -103,6 +115,16 @@ function my_acf_excerpt( $value, $post_id, $field ) {
 		'ID' => $post_id,
 		'post_excerpt' => $value
 	) );
+	return $value;
+}
+
+function my_acf_gallery( $value, $post_id, $field ) {
+	update_post_meta( $post_id, '_thumbnail_id', intval( $value[0] ) );
+	return $value;
+}
+
+function my_acf_featured_image( $value, $post_id, $field ) {
+	update_post_meta( $post_id, '_thumbnail_id', intval( $value ) );
 	return $value;
 }
 
@@ -151,4 +173,104 @@ function register_cpt_projeto() {
 	);
 
 	register_post_type( 'projeto', $args );
+}
+
+add_action( 'init', 'register_cpt_consultoria' );
+
+function register_cpt_consultoria() {
+
+	$labels = array( 
+		'name' => _x( 'Consultorias', 'marilia' ),
+		'singular_name' => _x( 'Consultoria', 'marilia' ),
+		'add_new' => _x( 'Adicionar Novo', 'marilia' ),
+		'add_new_item' => _x( 'Adicionar nova consultoria', 'marilia' ),
+		'edit_item' => _x( 'Editar Consultoria', 'marilia' ),
+		'new_item' => _x( 'Nova Consultoria', 'marilia' ),
+		'view_item' => _x( 'Ver Consultoria', 'marilia' ),
+		'search_items' => _x( 'Search Consultorias', 'marilia' ),
+		'not_found' => _x( 'No consultorias found', 'marilia' ),
+		'not_found_in_trash' => _x( 'No consultorias found in Trash', 'marilia' ),
+		'parent_item_colon' => _x( 'Parent Consultoria:', 'marilia' ),
+		'menu_name' => _x( 'Consultorias', 'marilia' ),
+	);
+
+	$args = array( 
+		'labels' => $labels,
+		'hierarchical' => false,
+		
+		'supports' => array( 'title', 'excerpt', 'custom-fields' ),
+		'taxonomies' => array( 'category' ),
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 20,
+		
+		'show_in_nav_menus' => true,
+		'publicly_queryable' => true,
+		'exclude_from_search' => false,
+		'has_archive' => true,
+		'query_var' => true,
+		'can_export' => true,
+		'rewrite' => true,
+		'capability_type' => 'post'
+	);
+
+	register_post_type( 'consultoria', $args );
+}
+
+add_action( 'init', 'register_cpt_publicacao' );
+
+function register_cpt_publicacao() {
+
+	$labels = array( 
+		'name' => _x( 'Publicações', 'marilia' ),
+		'singular_name' => _x( 'Publicação', 'marilia' ),
+		'add_new' => _x( 'Adicionar Novo', 'marilia' ),
+		'add_new_item' => _x( 'Adicionar nova publicação', 'marilia' ),
+		'edit_item' => _x( 'Editar Publicação', 'marilia' ),
+		'new_item' => _x( 'Nova Publicação', 'marilia' ),
+		'view_item' => _x( 'Ver Publicação', 'marilia' ),
+		'search_items' => _x( 'Search Publicações', 'marilia' ),
+		'not_found' => _x( 'No publicação found', 'marilia' ),
+		'not_found_in_trash' => _x( 'No publicação found in Trash', 'marilia' ),
+		'parent_item_colon' => _x( 'Parent Publicação:', 'marilia' ),
+		'menu_name' => _x( 'Publicações', 'marilia' ),
+	);
+
+	$args = array( 
+		'labels' => $labels,
+		'hierarchical' => false,
+		
+		'supports' => array( 'title', 'excerpt', 'custom-fields' ),
+		'taxonomies' => array( 'category' ),
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 20,
+		
+		'show_in_nav_menus' => true,
+		'publicly_queryable' => true,
+		'exclude_from_search' => false,
+		'has_archive' => true,
+		'query_var' => true,
+		'can_export' => true,
+		'rewrite' => true,
+		'capability_type' => 'post'
+	);
+
+	register_post_type( 'publicacao', $args );
+}
+
+// 
+// Publicações
+// 
+
+add_filter( 'post_type_link', 'append_query_string', 10, 2 );
+
+function append_query_string( $url, $post ) {
+	if ( 'publicacao' == get_post_type( $post ) ) {
+		$new = get_field( 'file' );
+		if ( $new ) return $new;
+	}
+	return $url;
 }

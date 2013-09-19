@@ -662,10 +662,12 @@ $m_height: 28em;
 .post-summary {
 	color: $gray;
 	font: 300 1.6em/1.4 $f2;
+	margin-left: 37%;
 }
 
 .post-gallery { position: relative }
 .gallery-wrap {
+	height: 54.4em;
 	margin: 0 auto;
 	overflow: hidden;
 	width: 70.6em;
