@@ -16,7 +16,7 @@
 					'theme_location' => 'primary',
 					'menu_class' 	 => 'menu',
 					'container' 	 => '',
-					'fallback_cb' 	 => false,
+					'fallback_cb' 	 => null,
 				) );
 				?>
 

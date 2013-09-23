@@ -34,7 +34,7 @@
 								<div class="gallery-wrap">
 									<div class="gallery-view">
 <?php 									foreach ( $images as $img ) : ?>
-										<a href="#"><img src="<?php t_url() ?>/timthumb.php?src=<?php echo $img['url']; ?>&amp;w=706&amp;h=544&amp;zc=2" alt="" class="gallery-img" width="706" height="544"></a>
+										<img src="<?php t_url() ?>/timthumb.php?src=<?php echo $img['url']; ?>&amp;w=706&amp;h=544&amp;zc=2" alt="" class="gallery-img" width="706" height="544">
 <?php 									endforeach; ?>
 									</div>
 								</div>

@@ -39,6 +39,20 @@ function my_category() {
 }
 
 // 
+// Javascript
+// 
+
+add_action( 'wp_enqueue_scripts', 'my_scripts' );
+
+function my_scripts() {
+	wp_deregister_script( 'jquery' );
+	wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.10.1.min.js', false, null, true );
+	wp_enqueue_script( 'jquery' );
+	
+	wp_enqueue_script( 'scripts', get_stylesheet_directory_uri() . '/js/interface.min.js', array( 'jquery' ), filemtime( TEMPLATEPATH . '/js/interface.min.js' ), true );
+}
+
+// 
 // Setup
 // 
 
@@ -48,6 +62,7 @@ add_action( 'after_switch_theme', 'my_init_setup' );
 function my_setup() {
 	// Menu
 	register_nav_menu( 'primary', __('Menu Superior', 'marilia') );
+	register_nav_menu( 'footer', __('Menu Inferior', 'marilia') );
 	// Thumbnails
 	add_theme_support( 'post-thumbnails', array('page', 'projeto', 'publicacao') );
 	add_image_size( 'featured_image', 	780, 372, true );

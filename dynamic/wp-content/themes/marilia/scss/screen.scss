@@ -453,6 +453,10 @@ $m_height: 28em;
 	padding-bottom: 4em;
 	width: 96em;
 	@include clearfix;
+	@include transition(all,$slow);
+}
+@for $i from 0 through 30 {
+	.matrix.pos-#{$i} { margin-left: (-777px * $i) }
 }
 .matrix-item {
 	background-position: center;
@@ -703,6 +707,11 @@ $m_height: 28em;
 	right: -3em;
 }
 
+.gallery-view { @include transition(all,$slow) }
+@for $i from 0 through 30 {
+	.gallery-view.pos-#{$i} { margin-left: (-706px * $i) }
+}
+
 .post-nav {
 	clear: both;
 	font: 300 1.5em/2.25 $f2;
@@ -762,6 +771,7 @@ $m_height: 28em;
 .more-view {
 	height: $m_height;
 	overflow: hidden;
+	width: 96em;
 }
 
 /* About / Contact */
