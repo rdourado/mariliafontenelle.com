@@ -19,7 +19,7 @@
 					<div class="wrap">
 <?php 					if ( get_field( 'featured_image' ) ) : ?>
 						<div class="page-thumbnail">
-							<?php wp_get_attachment_image( get_field( 'featured_image' ), 'featured_image' ); ?>
+							<?php echo wp_get_attachment_image( get_field( 'featured_image' ), 'featured_image' ); ?>
 
 						</div>
 <?php 					endif; ?>
@@ -31,10 +31,23 @@
 							<div class="page-sidebar">
 <?php 							if ( 'image' == get_field( 'sidebar' ) ) : ?>
 								<figure class="figure">
-									<?php wp_get_attachment_image( get_field( 'sidebar_image' ), 'medium' ); ?>
+									<?php echo wp_get_attachment_image( get_field( 'sidebar_image' ), 'medium' ); ?>
 
 									<figcaption class="caption"><?php the_field('sidebar_caption') ?></figcaption>
 								</figure>
+<?php 							elseif ( 'gallery' == get_field( 'sidebar' ) ) : ?>
+								<div class="sidebar-gallery">
+									<div class="sidebar-wrap">
+										<div class="sidebar-view">
+<?php 										$images = get_field( 'sidebar_gallery' );
+											foreach ( $images as $img ) : ?>
+											<a href="<?php echo $img['url']; ?>" class="fancybox"><img src="<?php t_url() ?>/timthumb.php?src=<?php echo $img['url']; ?>&amp;w=68&amp;h=68" alt="" class="gallery-img"></a>
+<?php 										endforeach; ?>
+										</div>
+									</div>
+									<button class="prev"></button>
+									<button class="next"></button>
+								</div>
 <?php 							endif; ?>
 							</div>
 <?php 						endif; ?>

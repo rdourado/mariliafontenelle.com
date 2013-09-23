@@ -1,88 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900|Titillium+Web:400,300,200,600);
-
-$f1: 'Titillium Web', sans-serif;
-$f2: 'Lato', sans-serif;
-
-$gray: rgb(51,51,51);
-$green: rgb(190,210,47);
-$lightGray: rgb(67,67,67);
-$lighterGray: rgb(239,239,239);
-$darkGreen: rgb(185,206,43);
-$darkerGreen: rgb(157,184,20);
-$greenAlpha: rgba(190,210,47, .95);
-
-$fast: .25s;
-$slow: .8s;
-
-@mixin clearfix {
-	&:before,
-	&:after {
-		content: " ";
-		display: table;
-	}
-	&:after { clear: both }
-	& { *zoom: 1 }
-}
-
-@mixin transition($prop, $time) {
-	-webkit-transition: $prop $time ease-out; 
-	   -moz-transition: $prop $time ease-out; 
-		 -o-transition: $prop $time ease-out; 
-			transition: $prop $time ease-out; 
-}
-
-@mixin box-sizing {
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-			box-sizing: border-box;
-}
-
-@mixin placeholder($color) {
-	&::-webkit-input-placeholder { /* WebKit browsers */
-		color: $color;
-	}
-	&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-		color: $color;
-	}
-	&::-moz-placeholder { /* Mozilla Firefox 19+ */
-		color: $color;
-	}
-	&:-ms-input-placeholder { /* Internet Explorer 10+ */
-		color: $color;
-	}
-}
-
-@mixin linear-gradient($orientation, $colors, $positions) {
-	$orientA: '';
-	$orientB: '';
-	$orientC: '';
-	@if $orientation == lr {
-		$orientA: left;
-		$orientB: to right;
-		$orientC: left top, right top;
-	}
-	@if $orientation == tb {
-		$orientA: top;
-		$orientB: to bottom;
-		$orientC: left top, left bottom;
-	}
-
-	$prop: ();
-	$old: ();
-	$total: length($colors);
-	@for $i from 1 through $total {
-		$prop: append($prop, nth($colors, $i) nth($positions, $i), comma);
-		$old: append($old, color-stop(nth($positions, $i),nth($colors, $i)), comma);
-	}
-	
-	background: nth($colors, 1); /* Old browsers */
-	background-image: -moz-linear-gradient($orientA, $prop); /* FF3.6+ */
-	background-image: -webkit-gradient(linear, $orientC, $old); /* Chrome,Safari4+ */
-	background-image: -webkit-linear-gradient($orientA, $prop); /* Chrome10+,Safari5.1+ */
-	background-image: -o-linear-gradient($orientA, $prop); /* Opera 11.10+ */
-	background-image: -ms-linear-gradient($orientA, $prop); /* IE10+ */
-	background-image: linear-gradient($orientB, $prop); /* W3C */
-}
+@import "config";
+@import "mixins";
 
 /* Tags */
 
@@ -669,7 +586,8 @@ $m_height: 28em;
 	margin-left: 37%;
 }
 
-.post-gallery { position: relative }
+.post-gallery,
+.sidebar-gallery { position: relative }
 .gallery-wrap {
 	height: 54.4em;
 	margin: 0 auto;
@@ -681,6 +599,7 @@ $m_height: 28em;
 		width: 70.6em;
 	}
 }
+
 .prev,
 .next {
 	border: 0 none;
@@ -712,6 +631,37 @@ $m_height: 28em;
 	.gallery-view.pos-#{$i} { margin-left: (-706px * $i) }
 }
 
+.sidebar-wrap {
+	height: 6.8em;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 22em;
+	img {
+		float: left;
+		height: auto;
+		margin-left: .8em;
+		width: 6.8em;
+		@include transition(opacity,$fast);
+	}
+	a:first-child img { margin-left: 0 }
+}
+.sidebar-gallery {
+	.prev {
+		background-size: 1.1em 2.8em;
+		left: -1em;
+	}
+	.next {
+		background-size: 1.1em 2.8em;
+		right: -1em;
+	}
+}
+.sidebar-view { @include transition(all,$slow) }
+@for $i from 0 through 30 {
+	.sidebar-view.pos-#{$i} { margin-left: (-228px * $i) }
+}
+.sidebar-view:hover img { opacity: .4 }
+.sidebar-view:hover img:hover { opacity: 1 }
+
 .post-nav {
 	clear: both;
 	font: 300 1.5em/2.25 $f2;
@@ -735,6 +685,7 @@ $m_height: 28em;
 }
 .nav-prev,
 .nav-next {
+	border: 0 none;
 	color: $gray;
 	float: right;
 	padding: 0 2em;
@@ -956,3 +907,9 @@ $padTop: 6em;
 	}
 }
 .submit { text-align: right }
+.ajax-loader {
+	display: none !important;
+	float: left;
+}
+
+@import "fancybox";

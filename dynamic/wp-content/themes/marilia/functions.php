@@ -33,7 +33,7 @@ function my_category() {
 	if ( $post->post_type == 'page' ) {
 		echo get_the_title( $post->post_parent );
 	} elseif ( $post->post_type == 'projeto' ) {
-		$list = get_the_category_list( ', ', '', $post->ID );
+		$list = get_the_category_list( ', ', '', $podst->ID );
 		echo strip_tags( $list );
 	}
 }
@@ -67,7 +67,6 @@ function my_setup() {
 	add_theme_support( 'post-thumbnails', array('page', 'projeto', 'publicacao') );
 	add_image_size( 'featured_image', 	780, 372, true );
 	add_image_size( 'wide_image', 		638, 276, true );
-	// add_image_size( 'square_image', 	318, 276, true );
 	// Remove default gallery style
 	add_filter( 'use_default_gallery_style', '__return_false' );
 }
@@ -92,11 +91,34 @@ function my_init_setup() {
 // 
 
 add_filter( 'default_hidden_meta_boxes', 'be_hidden_meta_boxes', 10, 2 );
+
 function be_hidden_meta_boxes( $hidden, $screen ) {
 	if ( 'post' == $screen->base || 'page' == $screen->base )
 		$hidden = array('slugdiv', 'trackbacksdiv', 'commentstatusdiv', 'commentsdiv', 'authordiv', 'revisionsdiv', 'postcustom');
 		// remove 'postexcerpt'
 	return $hidden;
+}
+
+add_action( 'admin_menu', 'edit_admin_menu' );
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
+add_filter( 'login_headerurl', 'my_login_logo_url' );
+add_filter( 'login_headertitle', 'my_login_logo_url_title' );
+
+function edit_admin_menu() {
+	remove_menu_page( 'edit-comments.php' );
+	remove_menu_page( 'tools.php' );
+}
+
+function my_login_logo() { 
+	$t_url = get_stylesheet_directory_uri();
+	?><link rel="stylesheet" href="<?php t_url() ?>/css/admin.css" media="screen" /><?php 
+}
+
+function my_login_logo_url() {
+	return home_url( '/' );
+}
+function my_login_logo_url_title() {
+	return __('Acessar o site', 'marilia');
 }
 
 // 
