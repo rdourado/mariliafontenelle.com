@@ -8,6 +8,16 @@
 </head>
 <body <?php body_class('no-js') ?>>
 	<div class="wrap">
+		<div class="fixed-nav">
+			<?php 
+			wp_nav_menu( array(
+				'theme_location' => 'primary',
+				'menu_class' 	 => 'fixed-menu',
+				'container' 	 => '',
+				'fallback_cb' 	 => null,
+			) );
+			?>
+		</div>
 		<header class="head">
 			<?php my_logo() ?>
 			<nav class="nav">
