@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php wp_title() ?></title>
-	<link href="<?php t_url() ?>/css/screen.css" media="screen" rel="stylesheet">
+	<link href="<?php t_url() ?>/css/screen.css?<?php echo filemtime( TEMPLATEPATH . '/css/screen.css' ); ?>" media="screen" rel="stylesheet">
 	<!-- WP/ --><?php wp_head() ?><!-- /WP -->
 </head>
 <body <?php body_class('no-js') ?>>

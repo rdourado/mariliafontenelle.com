@@ -105,6 +105,7 @@ add_filter( 'login_headerurl', 'my_login_logo_url' );
 add_filter( 'login_headertitle', 'my_login_logo_url_title' );
 
 function edit_admin_menu() {
+	remove_menu_page( 'edit.php' );
 	remove_menu_page( 'edit-comments.php' );
 	remove_menu_page( 'tools.php' );
 }
