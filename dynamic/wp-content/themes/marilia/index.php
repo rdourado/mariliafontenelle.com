@@ -34,7 +34,7 @@ $ID = get_option( 'page_on_front' );
 <?php 			elseif ( $layout == 2 ) : ?>
 				<div class="mosaic-narrow">
 					<div class="mosaic-image" style="background-image:url(<?php 
-					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_1"), 'square_image' ) ) ?>)"></div>
+					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_1"), 'thumbnail' ) ) ?>)"></div>
 					<div class="mosaic-cover">
 						<div class="table">
 							<div class="cell">
@@ -55,16 +55,16 @@ $ID = get_option( 'page_on_front' );
 				</div>
 				<div class="mosaic-box">
 					<div class="mosaic-image" style="background-image:url(<?php 
-					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_2"), 'square_image' ) ) ?>)"></div>
+					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_2"), 'thumbnail' ) ) ?>)"></div>
 				</div>
 <?php 			elseif ( $layout == 3 ) : ?>
 				<div class="mosaic-box">
 					<div class="mosaic-image" style="background-image:url(<?php 
-					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_1"), 'square_image' ) ) ?>)"></div>
+					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_1"), 'thumbnail' ) ) ?>)"></div>
 				</div>
 				<div class="mosaic-narrow">
 					<div class="mosaic-image" style="background-image:url(<?php 
-					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_2"), 'square_image' ) ) ?>)"></div>
+					echo reset( wp_get_attachment_image_src( get_field("{$i}_image_2_2"), 'thumbnail' ) ) ?>)"></div>
 					<div class="mosaic-cover">
 						<div class="table">
 							<div class="cell">

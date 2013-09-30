@@ -2,65 +2,111 @@
 @import "mixins";
 
 #login { padding-top: 50px }
-body.login {
-	@include linear-gradient(tb, (#fff, $green), (173px, 173px))
-}
+body.login { background: #fff }
 body.login div#login h1 a {
 	background-image: url(../img/logo.png);
 	background-size: auto;
-	height: 124px;
+	height: 104px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 160px;
 }
-.login #nav a,
-.login #backtoblog a {
-	color: $gray !important;
-	font: 400 14px $f1;
-	text-decoration: none;
-	text-shadow: none;
-	&:hover {
-		border-bottom: 1px solid $gray;
+.login #nav,
+.login #backtoblog {
+	clear: both;
+	margin-left: 0;
+	padding-left: 1em;
+	a {
 		color: $gray !important;
+		font: 400 14px $f1;
+		text-decoration: none;
+		text-shadow: none;
+		&:hover {
+			color: $green !important;
+		}
 	}
 }
+.wp-core-ui .button.button-large,
+.wp-core-ui .button-group.button-large .button,
 .wp-core-ui .button-primary {
 	background: none;
-	border: 1px solid $gray;
+	border: 1px solid $gray !important;
 	color: $gray;
+	cursor: pointer;
 	display: inline-block;
-	font: 300 1.77em $f1;
-	padding: .1em .6em;
+	font: 300 2.4em $f1;
+	height: auto;
+	outline: none;
+	padding: 0 .5em;
+	text-shadow: none !important;
 	text-transform: uppercase;
-	@include border-radius(0);
+	width: auto;
+	-webkit-box-shadow: none !important;
+			box-shadow: none !important;
 	@include transition(all,$fast);
+	@include border-radius(0);
 	&:hover,
 	&:focus,
 	&:active {
 		background: $gray;
-		color: $green;
+		color: #fff;
 	}
 }
 
 .login form {
-	background: $darkGreen;
 	border: 0 none;
+	padding-left: 0;
+	padding-right: 0;
 	-webkit-box-shadow: none;
 			box-shadow: none;
+	.forgetmenot label {
+		color: $gray;
+		font: 400 14px $f1;
+		height: auto;
+	}
+	p.submit { font-size: 10px }
+}
+#rememberme {
+	display: inline-block;
+	margin-right: 5px;
+	margin-top: 5px;
+}
+.login label {
+	color: #fff;
+	display: block;
+	font-size: 10px;
+	height: 6em;
+	position: relative;
 }
 .login form .input,
 .login input[type="text"] {
-	background: #f3f3f3;
-	border: 0 none;
+	background: #fff;
+	border: 1px solid $gray;
+	color: $gray;
+	display: block;
+	font: 300 2.8em $f1;
+	left: 0;
+	margin: 0 0 .7em;
+	outline: none;
+	padding: 0 .5em;
+	position: absolute;
+	top: 0;
+	width: 100%;
 	-webkit-box-shadow: none;
 			box-shadow: none;
+	@include box-sizing;
+	@include border-radius(0);
+	@include placeholder($gray);
+	&:focus { @include placeholder(transparent) }
 }
 div.updated,
 .login .message {
-	background: $darkGreen;
+	background: none;
 	border: 0 none;
 	color: $gray;
 	font: 400 14px $f1;
-	padding-left: 24px;
-	padding-right: 24px;
+	margin-bottom: 0;
+	margin-left: 0;
+	padding-bottom: 0;
+	padding-left: 1em;
 }

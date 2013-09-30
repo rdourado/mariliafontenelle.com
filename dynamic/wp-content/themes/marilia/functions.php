@@ -101,6 +101,7 @@ function be_hidden_meta_boxes( $hidden, $screen ) {
 
 add_action( 'admin_menu', 'edit_admin_menu' );
 add_action( 'login_enqueue_scripts', 'my_login_logo' );
+add_action( 'login_footer', 'my_login_js' );
 add_filter( 'login_headerurl', 'my_login_logo_url' );
 add_filter( 'login_headertitle', 'my_login_logo_url_title' );
 
@@ -113,6 +114,13 @@ function edit_admin_menu() {
 function my_login_logo() { 
 	$t_url = get_stylesheet_directory_uri();
 	?><link rel="stylesheet" href="<?php t_url() ?>/css/admin.css" media="screen" /><?php 
+}
+
+function my_login_js() {
+?><script>
+document.getElementById('user_login').placeholder = 'usuário';
+document.getElementById('user_pass').placeholder = 'senha';
+</script><?php
 }
 
 function my_login_logo_url() {
