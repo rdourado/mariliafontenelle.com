@@ -15,6 +15,13 @@
 			transition: $prop $time ease-out; 
 }
 
+@mixin animation($prop) {
+	-webkit-animation: $prop;
+	   -moz-animation: $prop;
+		 -o-animation: $prop;
+			animation: $prop;
+}
+
 @mixin box-sizing {
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
@@ -28,18 +35,10 @@
 }
 
 @mixin placeholder($color) {
-	&::-webkit-input-placeholder { /* WebKit browsers */
-		color: $color;
-	}
-	&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-		color: $color;
-	}
-	&::-moz-placeholder { /* Mozilla Firefox 19+ */
-		color: $color;
-	}
-	&:-ms-input-placeholder { /* Internet Explorer 10+ */
-		color: $color;
-	}
+	&::-webkit-input-placeholder { color: $color }
+	&:-moz-placeholder { color: $color }
+	&::-moz-placeholder { color: $color }
+	&:-ms-input-placeholder { color: $color }
 }
 
 @mixin linear-gradient($orientation, $colors, $positions) {

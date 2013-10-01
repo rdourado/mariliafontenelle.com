@@ -104,11 +104,19 @@ a {
 			position: relative;
 			top: 1px;
 		}
-		.home & { color: $gray }
+		.home & {
+			color: $gray;
+			&:hover,
+			&:focus { color: $green }
+		}
 	}
 }
 .current-menu-item > a,
-.current-menu-ancestor > a {
+.current-menu-ancestor > a,
+.single-projeto .menu-item-projeto a,
+.single-publicacao .menu-item-publicacao a,
+.single-consultoria .menu-item-consultoria a,
+.post-type-archive-projeto .menu-item-projeto a {
 	border-bottom: 2px solid $green;
 	color: $gray;
 }
@@ -389,7 +397,8 @@ $m_height: 28em;
 @for $i from 0 through 30 {
 	.matrix.pos-#{$i} { margin-left: (-777px * $i) }
 }
-.matrix-item {
+.matrix-item,
+.matrix-item-wide {
 	background-position: center;
 	background-size: cover;
 	border: 2px solid #fff;
@@ -398,6 +407,7 @@ $m_height: 28em;
 	@include box-sizing;
 	&:hover .matrix-cover { opacity: 1 }
 }
+.matrix-item-wide { width: 64em }
 .matrix-cover {
 	background: $green;
 	background: $greenAlpha;
@@ -476,7 +486,7 @@ $m_height: 28em;
 		display: block;
 		height: 5.2em;
 		left: 50%;
-		margin: -6.9em 0 0 -2.6em;
+		margin: -2.6em 0 0 -2.6em;
 		opacity: 0;
 		position: absolute;
 		top: 50%;
@@ -489,13 +499,9 @@ $m_height: 28em;
 }
 .page-thumbnail img { display: block }
 .page-wrap {
-	background: #fff;
-	background: rgba(255,255,255, .85);
 	overflow: hidden;
 	position: relative;
-	
 }
-.page-thumbnail + .page-wrap { top: -8.6em }
 .page-content {
 	color: $lightGray;
 	float: left;
@@ -798,6 +804,7 @@ $padTop: 6em;
 		margin-left: -44em;
 		position: absolute;
 		top: $padTop;
+		width: 39.7em;
 	}
 	.column-2 {
 		left: 50%;
@@ -900,6 +907,7 @@ $padTop: 6em;
 	width: 14.2em;
 	@include box-sizing;
 	@include placeholder($gray);
+	@include transition(all,$fast);
 	&:focus { @include placeholder(transparent) }
 }
 .button {
@@ -925,6 +933,17 @@ $padTop: 6em;
 .ajax-loader {
 	display: none !important;
 	float: left;
+}
+
+.wpcf7-not-valid-tip { display: none }
+.wpcf7-not-valid {
+	border-width: 3px;
+	margin-bottom: .6em;
+}
+.wpcf7-response-output {
+	font: 400 1.4em/1.5 $f1;
+	margin-top: -2.9em;
+	width: 60%;
 }
 
 @import "fancybox";

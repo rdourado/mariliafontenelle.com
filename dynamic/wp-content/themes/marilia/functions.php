@@ -19,13 +19,30 @@ function my_logo() {
 	else echo "<div class='logo'><a href='{$home}'>{$logo}</a></div>\n";
 }
 
-function my_thumb( $size = 'thumbnail' ) {
+function my_thumb( $field = 'featured_image_square', $size = 'thumbnail' ) {
 	global $post;
-	$id = get_post_thumbnail_id( $post->ID );
+	$id = intval( get_field( $field, $post->ID ) );
+	if ( ! $id )
+		$id = intval( get_post_thumbnail_id( $post->ID ) );
 	if ( $id )
 		$src = wp_get_attachment_image_src( $id, $size );
 	if ( $src )
-		echo $src[0];
+		return $src[0];
+	return '';
+}
+
+function matrix_class( $i ) {
+	if ( $i % 10 == 0 || ($i - 6) % 10 == 0 )
+		echo 'class="matrix-item-wide"';
+	else 
+		echo 'class="matrix-item"';
+}
+
+function matrix_thumb( $i ) {
+	if ( $i % 10 == 0 || ($i - 6) % 10 == 0 )
+		echo my_thumb( 'featured_image_wide', 'wide_image' );
+	else 
+		echo my_thumb();
 }
 
 function my_category() {
@@ -58,6 +75,7 @@ function my_scripts() {
 
 add_action( 'after_setup_theme', 'my_setup' );
 add_action( 'after_switch_theme', 'my_init_setup' );
+add_action( 'init', 'change_role_names' );
 
 function my_setup() {
 	// Menu
@@ -65,14 +83,16 @@ function my_setup() {
 	register_nav_menu( 'footer', __('Menu Inferior', 'marilia') );
 	// Thumbnails
 	add_theme_support( 'post-thumbnails', array('page', 'projeto', 'publicacao') );
-	add_image_size( 'featured_image', 	780, 372, true );
+	// add_image_size( 'featured_image', 	780, 372, true );
+	add_image_size( 'featured_image', 	780, 286, true );
 	add_image_size( 'wide_image', 		638, 276, true );
 	// Remove default gallery style
 	add_filter( 'use_default_gallery_style', '__return_false' );
 }
 
 function my_init_setup() {
-	// remove_role( 'subscriber' );
+	remove_role( 'author' );
+	remove_role( 'contributor' );
 	// $role = get_role( 'editor' );
 	// $role->remove_cap( 'edit_pages' );
 		
@@ -84,6 +104,14 @@ function my_init_setup() {
 	// update_option( 'large_size_h', 475 );
 	// update_option( 'large_crop', 1 );
 	// delete_option( 'medium_crop' );
+}
+
+function change_role_names() {
+	global $wp_roles;
+	if ( ! isset( $wp_roles ) )
+		$wp_roles = new WP_Roles();
+	
+	$wp_roles->roles['subscriber']['name'] = $wp_roles->role_names['subscriber'] = __('Cliente' , 'marilia');
 }
 
 // 
@@ -305,6 +333,49 @@ function register_cpt_publicacao() {
 	);
 
 	register_post_type( 'publicacao', $args );
+}
+
+add_action( 'init', 'register_cpt_feedback' );
+
+function register_cpt_feedback() {
+
+    $labels = array( 
+        'name' => _x( 'Feedback', 'feedback' ),
+        'singular_name' => _x( 'Feedback', 'feedback' ),
+        'add_new' => _x( 'Add New', 'feedback' ),
+        'add_new_item' => _x( 'Add New Feedback', 'feedback' ),
+        'edit_item' => _x( 'Edit Feedback', 'feedback' ),
+        'new_item' => _x( 'New Feedback', 'feedback' ),
+        'view_item' => _x( 'View Feedback', 'feedback' ),
+        'search_items' => _x( 'Search Feedback', 'feedback' ),
+        'not_found' => _x( 'No feedback found', 'feedback' ),
+        'not_found_in_trash' => _x( 'No feedback found in Trash', 'feedback' ),
+        'parent_item_colon' => _x( 'Parent Feedback:', 'feedback' ),
+        'menu_name' => _x( 'Feedback', 'feedback' ),
+    );
+
+    $args = array( 
+        'labels' => $labels,
+        'hierarchical' => false,
+        
+        'supports' => array( 'title', 'editor', 'custom-fields' ),
+        
+        'public' => false,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 20,
+        
+        'show_in_nav_menus' => false,
+        'publicly_queryable' => true,
+        'exclude_from_search' => true,
+        'has_archive' => false,
+        'query_var' => true,
+        'can_export' => true,
+        'rewrite' => true,
+        'capability_type' => 'post'
+    );
+
+    register_post_type( 'feedback', $args );
 }
 
 // 

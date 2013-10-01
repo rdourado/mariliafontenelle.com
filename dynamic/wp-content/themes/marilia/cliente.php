@@ -2,10 +2,20 @@
 /*
 Template name: Área do Cliente
 */
+if ( ! is_user_logged_in() ) {
+	wp_redirect( home_url( '/wp-login.php?redirect_to=' . get_permalink() ) );
+	exit;
+}
 ?>
 <?php 	get_header() ?>
 		<div class="torso" role="main">
-<?php 		while( have_posts() ) : the_post(); ?>
+<?php 		$query = new WP_Query( array(
+				'post_type' => 'feedback',
+				'meta_key' => 'cliente',
+				'meta_value_num' => get_current_user_id(),
+				'posts_per_page' => -1,
+			) );
+			while( $query->have_posts() ) : $query->the_post(); ?>
 			<article class="page hentry">
 				<header class="header">
 					<div class="wrap">

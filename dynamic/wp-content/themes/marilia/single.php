@@ -59,7 +59,7 @@
 									<div class="more-view">
 										<ul class="matrix">
 <?php 										while( $loop->have_posts() ) : $loop->the_post(); ?>
-											<li class="matrix-item" style="background-image:url(<?php my_thumb(); ?>)">
+											<li class="matrix-item" style="background-image:url(<?php echo my_thumb(); ?>)">
 												<a href="<?php the_permalink() ?>" class="matrix-cover">
 													<div class="cell">
 														<p class="matrix-category"><?php my_category() ?></p>
