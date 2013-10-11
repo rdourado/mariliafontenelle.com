@@ -1,3 +1,7 @@
+function supportsSVG() {
+	return !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', "svg").createSVGRect;
+}
+
 function my_gallery(_wrap, _view, _items, _width, _show) {
 	var gallery = $(_wrap);
 	if (gallery.length) {
@@ -45,8 +49,15 @@ $(document).ready(function(){
 		$('.fancybox').first().trigger('click');
 	});
 
+	// SVG Fallback
+	if (!supportsSVG()) {
+		$('img[src*="svg"]').attr('src', function() {
+			return $(this).attr('src').replace('.svg', '.png');
+		});
+	}
+
 	// Touch
-	if ('ontouchstart' in window || 'onmsgesturechange' in window) {
+	if ('ontouchstart' in window) {
 		setTimeout(function(){
 			$('.mosaic-wide,.mosaic-narrow').addClass('hover');
 		}, 1800);
