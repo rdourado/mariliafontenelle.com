@@ -20,11 +20,6 @@ li { list-style: none }
 a {
 	outline: none;
 	text-decoration: none;
-	&:focus,
-	&:active {
-		position: relative;
-		top: 1px;
-	}
 }
 
 /* Layout */
@@ -282,7 +277,8 @@ $m_height: 28em;
 		width: 32em;
 	}
 	&:hover .mosaic-cover,
-	&.hover .mosaic-cover { right: 21% }
+	&.hover .mosaic-cover,
+	&:active .mosaic-cover { right: 21% }
 }
 .mosaic-narrow {
 	border: 2px solid #fff;
@@ -307,7 +303,8 @@ $m_height: 28em;
 		width: 50.4%;
 	}
 	&:hover .mosaic-cover,
-	&.hover .mosaic-cover { left: 32% }
+	&.hover .mosaic-cover,
+	&:active .mosaic-cover { left: 32% }
 }
 .mosaic-box {
 	border: 2px solid #fff;

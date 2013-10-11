@@ -7,6 +7,7 @@ Template name: Arquivo
 		<div class="body" role="main">
 			<ul class="matrix">
 <?php 			$i = 0;
+				$symmetrical = get_field( 'post_type' ) == 'projeto' ? false : true;
 				if ( is_page() )
 					query_posts( "post_type=" . get_field( 'post_type' ) . "&posts_per_page=-1" );
 				else
@@ -23,4 +24,4 @@ Template name: Arquivo
 <?php 			endwhile; ?>
 			</ul>
 		</div>
-<?php 	get_footer() ?>	
+<?php 	get_footer() ?>

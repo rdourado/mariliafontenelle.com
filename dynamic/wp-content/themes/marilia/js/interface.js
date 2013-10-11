@@ -45,6 +45,12 @@ $(document).ready(function(){
 		$('.fancybox').first().trigger('click');
 	});
 
+	// Touch
+	if ('ontouchstart' in window || 'onmsgesturechange' in window) {
+		setTimeout(function(){
+			$('.mosaic-wide,.mosaic-narrow').addClass('hover');
+		}, 1800);
+	}
 });
 
 $(window).scroll(function(){

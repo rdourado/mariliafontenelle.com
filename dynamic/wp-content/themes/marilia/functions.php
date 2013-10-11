@@ -32,7 +32,10 @@ function my_thumb( $field = 'featured_image_square', $size = 'thumbnail' ) {
 }
 
 function matrix_class( $i ) {
-	if ( $i % 10 == 0 || ($i - 6) % 10 == 0 )
+	global $symmetrical;
+	if ( $symmetrical )
+		echo 'class="matrix-item"';
+	elseif ( $i % 10 == 0 || ($i - 6) % 10 == 0 )
 		echo 'class="matrix-item-wide"';
 	else 
 		echo 'class="matrix-item"';
@@ -49,7 +52,7 @@ function my_category() {
 	global $post;
 	if ( $post->post_type == 'page' ) {
 		echo get_the_title( $post->post_parent );
-	} elseif ( $post->post_type == 'projeto' ) {
+	} else {
 		$list = get_the_category_list( ', ', '', $podst->ID );
 		echo strip_tags( $list );
 	}
@@ -84,7 +87,7 @@ function my_setup() {
 	// Thumbnails
 	add_theme_support( 'post-thumbnails', array('page', 'projeto', 'publicacao') );
 	// add_image_size( 'featured_image', 	780, 372, true );
-	add_image_size( 'featured_image', 	780, 286, true );
+	add_image_size( 'featured_image', 	780, 337, true );
 	add_image_size( 'wide_image', 		638, 276, true );
 	// Remove default gallery style
 	add_filter( 'use_default_gallery_style', '__return_false' );
@@ -136,7 +139,8 @@ add_filter( 'login_headertitle', 'my_login_logo_url_title' );
 function edit_admin_menu() {
 	remove_menu_page( 'edit.php' );
 	remove_menu_page( 'edit-comments.php' );
-	remove_menu_page( 'tools.php' );
+	if ( ! current_user_can( 'update_core' ) )
+		remove_menu_page( 'tools.php' );
 }
 
 function my_login_logo() { 
@@ -386,8 +390,10 @@ add_filter( 'post_type_link', 'append_query_string', 10, 2 );
 
 function append_query_string( $url, $post ) {
 	if ( 'publicacao' == get_post_type( $post ) ) {
-		$new = get_field( 'file' );
-		if ( $new ) return $new;
+		$type = get_field( 'url_type' );
+		$file = get_field( 'file' );
+		$link = esc_url( get_field( 'link' ) );
+		if ( $file || $link ) return $type == 'link' ? $link : $file;
 	}
 	return $url;
 }
