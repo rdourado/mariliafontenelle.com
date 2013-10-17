@@ -25,7 +25,7 @@ Template name: Sobre
 					<?php the_field('resume') ?>
 <?php 				if ( get_field('resume_type') ) :
 					$link = ('file' == get_field('resume_type')) ? get_field('resume_file') : esc_url( get_field('resume_link') ); ?>
-					<p><a href="<?php echo $link; ?>" class="small-button"><?php _e('Currículo Lates', 'marilia') ?></a></p>
+					<p><a href="<?php echo $link; ?>" class="small-button"><?php _e('Currículo Lattes', 'marilia') ?></a></p>
 <?php 				endif; ?>
 				</div>
 			</article>

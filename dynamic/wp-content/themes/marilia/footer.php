@@ -11,8 +11,8 @@
 		?>
 
 		<ul class="social-menu">
-			<li class="social-item item-fb"><a href="<?php echo esc_url( get_field('facebook', 10) ); ?>"><img src="<?php t_url() ?>/img/ico-fb.svg" alt="Facebook" width="16" height="16"></a></li>
-			<li class="social-item item-in"><a href="<?php echo esc_url( get_field('linkedin', 10) ); ?>"><img src="<?php t_url() ?>/img/ico-in.svg" alt="LinkedIn" width="16" height="16"></a></li>
+			<li class="social-item item-fb"><a href="<?php echo esc_url( get_field('facebook', 10) ); ?>" target="_blank"><img src="<?php t_url() ?>/img/ico-fb.svg" alt="Facebook" width="16" height="16"></a></li>
+			<li class="social-item item-in"><a href="<?php echo esc_url( get_field('linkedin', 10) ); ?>" target="_blank"><img src="<?php t_url() ?>/img/ico-in.svg" alt="LinkedIn" width="16" height="16"></a></li>
 		</ul>
 		<p class="copyright">© <?php echo date('Y'); ?> - <?php bloginfo('name') ?> — <?php _e('Todos os direitos reservados.', 'marilia') ?></p>
 	</footer>
