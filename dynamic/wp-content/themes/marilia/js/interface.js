@@ -57,11 +57,11 @@ $(document).ready(function(){
 	}
 
 	// Touch
-	if ('ontouchstart' in window) {
-		setTimeout(function(){
-			$('.mosaic-wide,.mosaic-narrow').addClass('hover');
-		}, 1800);
-	}
+	// if ('ontouchstart' in window) {
+	// 	setTimeout(function(){
+	// 		$('.mosaic-wide,.mosaic-narrow').addClass('hover');
+	// 	}, 1800);
+	// }
 });
 
 $(window).scroll(function(){
